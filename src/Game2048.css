@@ -1,0 +1,97 @@
+body {
+  font-family: "Roboto", sans-serif;
+  background: #faf8ef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.game-container {
+  text-align: center;
+}
+
+.game-title {
+  font-size: 2.5rem;
+  color: #776e65;
+  margin-bottom: 10px;
+}
+
+.score {
+  font-size: 1.2rem;
+  color: #776e65;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.grid {
+  background: #bbada0;
+  border-radius: 10px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  background: #cdc1b4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 5px;
+  color: white;
+}
+
+.tile-2 {
+  background: #eee4da;
+  color: #776e65;
+}
+
+.tile-4 {
+  background: #ede0c8;
+  color: #776e65;
+}
+
+.tile-8 {
+  background: #f2b179;
+}
+
+.tile-16 {
+  background: #f59563;
+}
+
+.tile-32 {
+  background: #f67c5f;
+}
+
+.tile-64 {
+  background: #f65e3b;
+}
+
+.tile-128 {
+  background: #edcf72;
+}
+
+.tile-256 {
+  background: #edcc61;
+}
+
+.tile-512 {
+  background: #edc850;
+}
+
+.tile-1024 {
+  background: #edc53f;
+}
+
+.tile-2048 {
+  background: #edc22e;
+}
