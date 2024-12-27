@@ -1,6 +1,6 @@
 {
-  "short_name": "2048",
-  "name": "2048 Game",
+  "short_name": "TileTrek",
+  "name": "Tile trek",
   "icons": [
     {
       "src": "favicon.png",
