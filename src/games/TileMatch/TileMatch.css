@@ -1,0 +1,98 @@
+/* General Styling */
+.tile-match-container {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ff7e5f;
+}
+
+.tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.win-message {
+  font-size: 1.5rem;
+  color: #4caf50;
+  margin-top: 20px;
+}
+
+/* Tile Styling */
+.tile {
+  width: 80px;
+  height: 80px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.tile.flipped .tile-front {
+  transform: rotateY(0);
+}
+
+.tile.flipped .tile-back {
+  transform: rotateY(-180deg);
+}
+
+.tile-front,
+.tile-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  transition: transform 0.5s ease;
+}
+
+.tile-front {
+  background: #ff7e5f;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.tile-back {
+  background: #feb47b;
+  color: white;
+  transform: rotateY(0);
+}
+
+.tile .tile-front img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+.tile.flipped .tile-front {
+  transform: rotateY(0deg);
+}
+
+.tile.flipped .tile-back {
+  transform: rotateY(180deg);
+}
+
+.tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.win-message {
+  font-size: 24px;
+  color: green;
+  text-align: center;
+  margin-top: 20px;
+}
