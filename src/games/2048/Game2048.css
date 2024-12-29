@@ -1,15 +1,7 @@
-body {
-  font-family: "Roboto", sans-serif;
-  background: #faf8ef;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-}
-
 .game-container {
   text-align: center;
+  min-height: 100vh; /* Makes sure the content takes at least the full height of the viewport */
+  padding-bottom: 50px;
 }
 
 .game-title {

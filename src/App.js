@@ -24,10 +24,10 @@ const App = () => {
   return (
     <div className="app-container">
       <header className="game-header">
-        <h1 className="app-title">
+        <div className="app-title">
           Tile Treks
           <img src={pikachuRunning} alt="Pikachu Running" className="pikachu" />
-        </h1>
+        </div>
         <div className="game-selector">
           <div
             className={`custom-dropdown ${isDropdownOpen ? "open" : ""}`}
