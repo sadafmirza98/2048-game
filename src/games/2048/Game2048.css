@@ -1,6 +1,6 @@
 .game-container {
   text-align: center;
-  min-height: 100vh; /* Makes sure the content takes at least the full height of the viewport */
+  min-height: 100vh;
   padding-bottom: 50px;
 }
 
