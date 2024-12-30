@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useCallback } from "react";
 import "./Game2048.css";
 
@@ -93,6 +92,7 @@ export default function Game2048() {
   // Memoize the handleKeyPress function (without unnecessary dependencies)
   const handleKeyPress = useCallback(
     (e) => {
+      // Sound effects
       const winSound = new Audio("/sounds/win.wav");
       const mergeSound = new Audio("/sounds/merge.wav");
       const gameOverSound = new Audio("/sounds/gameover.wav");
@@ -221,57 +221,7 @@ export default function Game2048() {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging, startPosition]);
-
-  // Handle touch events for mobile swipe functionality
-  const handleTouchStart = (e) => {
-    setStartPosition({
-      x: e.touches[0].clientX,
-      y: e.touches[0].clientY,
-    });
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isDragging) return;
-
-    const dx = e.touches[0].clientX - startPosition.x;
-    const dy = e.touches[0].clientY - startPosition.y;
-
-    if (Math.abs(dx) > Math.abs(dy)) {
-      if (dx > 50) {
-        handleDragEnd("right");
-        e.preventDefault(); // Prevent scrolling
-      } else if (dx < -50) {
-        handleDragEnd("left");
-        e.preventDefault(); // Prevent scrolling
-      }
-    } else {
-      if (dy > 50) {
-        handleDragEnd("down");
-        e.preventDefault(); // Prevent scrolling
-      } else if (dy < -50) {
-        handleDragEnd("up");
-        e.preventDefault(); // Prevent scrolling
-      }
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener("touchstart", handleTouchStart, {
-      passive: false, // Allow touchmove to be prevented
-    });
-    document.addEventListener("touchmove", handleTouchMove, { passive: false });
-    document.addEventListener("touchend", handleTouchEnd);
-
-    return () => {
-      document.removeEventListener("touchstart", handleTouchStart);
-      document.removeEventListener("touchmove", handleTouchMove);
-      document.removeEventListener("touchend", handleTouchEnd);
-    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDragging, startPosition]);
 
   return (
