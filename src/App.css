@@ -10,6 +10,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  flex-direction: column; /* Added flex-direction for vertical stacking on small screens */
 }
 
 .app-container {
@@ -162,6 +163,7 @@ body {
     transform: translateX(0);
   }
 }
+
 footer {
   position: absolute;
   left: 0;
@@ -172,4 +174,62 @@ footer {
   text-align: center;
   padding: 5px 0;
   letter-spacing: 1px;
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 768px) {
+  body {
+    flex-direction: column;
+    padding: 20px; /* Add padding to the body for smaller screens */
+  }
+
+  .app-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .game-dropdown {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .custom-dropdown {
+    max-width: 100%;
+  }
+
+  .pikachu {
+    width: 40px; /* Make the Pikachu smaller on mobile */
+  }
+
+  footer {
+    bottom: -45vh;
+    padding: 10px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .app-title {
+    font-size: 1.5rem;
+  }
+
+  .game-dropdown {
+    font-size: 0.8rem;
+  }
+
+  .pikachu {
+    width: 30px; /* Even smaller Pikachu image on very small screens */
+  }
+
+  .game-display {
+    margin-top: 15px;
+    padding: 15px;
+  }
+
+  footer {
+    padding: 15px 0;
+  }
 }

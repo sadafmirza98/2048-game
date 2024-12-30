@@ -86,6 +86,9 @@ export default function Game2048() {
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false); // Track if the user wins
 
+  const [isDragging, setIsDragging] = useState(false);
+  const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
+
   // Memoize the handleKeyPress function (without unnecessary dependencies)
   const handleKeyPress = useCallback(
     (e) => {
@@ -145,8 +148,84 @@ export default function Game2048() {
     setGameWon(false); // Reset win state on restart
   };
 
+  // Handle drag start
+  const handleMouseDown = (e) => {
+    if (gameOver) return;
+
+    setIsDragging(true);
+    setStartPosition({ x: e.clientX, y: e.clientY });
+  };
+
+  // Handle drag move
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+
+    const dx = e.clientX - startPosition.x;
+    const dy = e.clientY - startPosition.y;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 50) {
+        handleDragEnd("right");
+      } else if (dx < -50) {
+        handleDragEnd("left");
+      }
+    } else {
+      if (dy > 50) {
+        handleDragEnd("down");
+      } else if (dy < -50) {
+        handleDragEnd("up");
+      }
+    }
+  };
+
+  // Handle drag end
+  const handleDragEnd = (direction) => {
+    setIsDragging(false);
+    const newGrid = move(grid, direction);
+
+    if (!gridsEqual(grid, newGrid)) {
+      addNewTile(newGrid);
+      const newScore = newGrid
+        .flat()
+        .filter((n) => n)
+        .reduce((a, b) => a + b, 0);
+      setScore(newScore);
+      setGrid(newGrid);
+
+      if (isGameWon(newGrid)) {
+        setGameWon(true);
+        const winSound = new Audio("/sounds/win.wav");
+        winSound.play(); // Play win sound
+      }
+
+      if (isGameOver(newGrid)) {
+        setGameOver(true);
+        const gameOverSound = new Audio("/sounds/gameover.wav");
+        gameOverSound.play(); // Play game over sound
+      }
+    }
+  };
+
+  // Handle mouse up
+  const handleMouseUp = () => {
+    if (isDragging) {
+      setIsDragging(false);
+    }
+  };
+
+  // Bind mouse events
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDragging, startPosition]);
+
   return (
-    <div className="game-container">
+    <div className="game-container" onMouseDown={handleMouseDown}>
       <h1 className="game-title">2048 Puzzle</h1>
       <div className="score">Score: {score}</div>
       {gameOver && (

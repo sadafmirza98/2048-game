@@ -1,6 +1,5 @@
 .game-container {
   text-align: center;
-  padding-bottom: 50px;
 }
 
 .game-title {
@@ -39,6 +38,8 @@
   font-weight: bold;
   border-radius: 5px;
   color: white;
+  cursor: grab;
+  user-select: none;
 }
 
 .tile-2 {
