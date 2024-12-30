@@ -224,6 +224,51 @@ export default function Game2048() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDragging, startPosition]);
 
+  // Handle touch events for mobile swipe functionality
+  const handleTouchStart = (e) => {
+    setStartPosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+
+    const dx = e.touches[0].clientX - startPosition.x;
+    const dy = e.touches[0].clientY - startPosition.y;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 50) {
+        handleDragEnd("right");
+      } else if (dx < -50) {
+        handleDragEnd("left");
+      }
+    } else {
+      if (dy > 50) {
+        handleDragEnd("down");
+      } else if (dy < -50) {
+        handleDragEnd("up");
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
+    document.addEventListener("touchmove", handleTouchMove, { passive: true });
+    document.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDragging, startPosition]);
+
   return (
     <div className="game-container" onMouseDown={handleMouseDown}>
       <h1 className="game-title">2048 Puzzle</h1>
